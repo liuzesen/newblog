@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>zeson的博客</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://liuzesen.github.io/"/>
+  <updated>2017-01-24T07:44:23.757Z</updated>
+  <id>http://liuzesen.github.io/</id>
+  
+  <author>
+    <name>zeson</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[linux]curl运维命令使用</title>
+    <link href="http://liuzesen.github.io/2017/01/24/css-linux-curl%E8%BF%90%E7%BB%B4%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8/"/>
+    <id>http://liuzesen.github.io/2017/01/24/css-linux-curl运维命令使用/</id>
+    <published>2017-01-24T07:40:15.000Z</published>
+    <updated>2017-01-24T07:44:23.757Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="查看curl的响应时间"><a href="#查看curl的响应时间" class="headerlink" title="查看curl的响应时间"></a>查看curl的响应时间</h4><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">curl -o /dev/null -s -w %&#123;time_namelookup&#125;::%&#123;time_connect&#125;::%&#123;time_starttransfer&#125;::%&#123;time_total&#125;::%&#123;speed_download&#125;&quot;\n&quot; &quot;http://www.qq.com&quot;</div><div class="line"></div><div class="line">-w 格式化输出curl请求的各个参数，这里用到了（时间单位为秒）：</div><div class="line">time_namelookup DNS寻址时间</div><div class="line">time_connect  DNS寻址时间+建立连接时间</div><div class="line">time_starttransfer  DNS寻址时间+建立连接时间+传输数据时间</div><div class="line">time_total    DNS寻址时间+建立连接时间+传输数据时间+关闭连接时间</div><div class="line">speed_download  下载速度</div><div class="line"></div><div class="line">-o 为输出内容的位置，如果想记录下来就写文件名称</div><div class="line">-s 静默模式，不显示连接等信息</div></pre></td></tr></table></figure>
+<p>效果如下：<br><a href="/images/shell_curl.png"><img src="/images/shell_curl.png" alt="图片"></a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;查看curl的响应时间&quot;&gt;&lt;a href=&quot;#查看curl的响应时间&quot; class=&quot;headerlink&quot; title=&quot;查看curl的响应时间&quot;&gt;&lt;/a&gt;查看curl的响应时间&lt;/h4&gt;&lt;hr&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>[css]横竖屏适配</title>
+    <link href="http://liuzesen.github.io/2017/01/24/css-%E6%A8%AA%E7%AB%96%E5%B1%8F%E9%80%82%E9%85%8D/"/>
+    <id>http://liuzesen.github.io/2017/01/24/css-横竖屏适配/</id>
+    <published>2017-01-24T07:28:51.000Z</published>
+    <updated>2017-01-24T07:38:45.015Z</updated>
+    
+    <content type="html"><![CDATA[<p>移动端完全支持。<br>参考文档：<a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Media_queries#浏览器兼容性" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Media_queries#浏览器兼容性</a></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">@<span class="keyword">media</span> screen and (orientation: portrait) &#123;</div><div class="line">  <span class="comment">/* 竖屏样式 */</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">@<span class="keyword">media</span> screen and (orientation: landscape) &#123;</div><div class="line">  <span class="comment">/* 横屏样式 */</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p><strong>bug</strong>:安卓软键盘会导致竖屏下触发横屏的样式。可以使用以下代码解决大部分机型问题，亲测iphone 4s上会出错：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">@<span class="keyword">media</span> screen and (max-aspect-ratio: <span class="number">13</span>/<span class="number">9</span>) &#123;</div><div class="line">  <span class="comment">/* 竖屏样式 */</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">@<span class="keyword">media</span> screen and (min-aspect-ratio: <span class="number">13</span>/<span class="number">9</span>)  &#123;</div><div class="line">  <span class="comment">/* 横屏样式 */</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>建议使用js配合css做横竖屏样式切换，简单的就是通过resize的样式能html根dom加上<strong>landscape</strong>class类，从而适配样式。注意通过<code>document.documentElement.clientWidth</code>获取宽度的时候如果切换频繁会出现错乱的情况，导致样式出错，可以在页面加载的时候对这些数据进行获取，使用代码进行切换，不再使用以上代码获取。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;移动端完全支持。&lt;br&gt;参考文档：&lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Media_queries#浏览器兼容性&quot;&gt;https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Media_queries#浏览器兼容性&lt;/a&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight css&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;@&lt;span class=&quot;keyword&quot;&gt;media&lt;/span&gt; screen and (orientation: portrait) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;comment&quot;&gt;/* 竖屏样式 */&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;@&lt;span class=&quot;keyword&quot;&gt;media&lt;/span&gt; screen and (orientation: landscape) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;comment&quot;&gt;/* 横屏样式 */&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://liuzesen.github.io/2017/01/24/hello-world/"/>
+    <id>http://liuzesen.github.io/2017/01/24/hello-world/</id>
+    <published>2017-01-24T07:00:55.356Z</published>
+    <updated>2017-01-24T07:00:55.360Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
