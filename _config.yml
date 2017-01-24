@@ -75,5 +75,6 @@ archive_generator:
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
+  # https://{username%40}:{password}@github.com/liuzesen/liuzesen.github.io.git
   repo: https://github.com/liuzesen/liuzesen.github.io.git
   branch: master
